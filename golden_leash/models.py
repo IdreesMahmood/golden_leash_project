@@ -17,4 +17,10 @@ class Dog(models.Model):
     def __str__(self):
         return self.name
 
-    
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+
+    picture = models.ImageField(upload_to='profile_images', blank=True)
+
+    def __str__(self):
+        return self.user.username    
