@@ -3,6 +3,10 @@ from golden_leash.forms import UserForm, UserProfileForm
 
 # Create your views here.
 
+def index(request):
+
+    return render(request, "golden_leash/index.html", {})
+
 def register(request):
     registered = False
 
