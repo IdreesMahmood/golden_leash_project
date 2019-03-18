@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-
+{% load static %}
 
 <html>
 	<head lang="en">
+		<link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
 		<title>
-			Rango -
+			Golden Leash
 			{% block title_block %}
-				How to Tango with Django!
+				Dog Walking Service
 			{% endblock %}
 		</title>
 	</head>
@@ -22,10 +23,11 @@
 		<hr />
 		<div>
 			<ul>
-				<li><a href="{% url 'about' %}">About</a></li>
-				<li><a href="{% url 'index' %}">Index</a></li>
-				<li><a href="{% url 'register' %}">Register</a></li>	
-				<li><a href="{% url 'login' %}">Login</a></li>
+				<li><a href="{% url 'register' %}">Regsiter here!</a></li>
+				<li><a href="{% url 'walkerProfiles' %}">Walker Profiles</a></li>
+				<li><a href="{% url 'viewDogs' %}">View Dogs</a></li>
+				<li><a href="{% url 'about' %}">About us</a></li>
+				<li><a href="{% url 'login' %}">Login here</a></li>
 			</ul>
 		</div>
 	</body>
