@@ -6,6 +6,22 @@ from golden_leash.forms import UserForm, UserProfileForm
 def index(request):
 
     return render(request, "golden_leash/index.html", {})
+    
+def walkerProfiles(request):
+
+	return render(request, "golden_leash/walkerProfiles.html", {})
+	
+def viewDogs(request):
+
+	return render(request, "golden_leash/viewDogs.html", {})
+	
+def about(request):
+
+	return render(request, "golden_leash/about.html", {})
+	
+def login(request):
+
+	return render(request, "golden_leash/login.html", {})
 
 def register(request):
     registered = False
