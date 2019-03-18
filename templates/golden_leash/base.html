@@ -13,6 +13,16 @@
 		</title>
 	</head>
 	<body>
+		
+		<header>
+			<a href="{% url 'index' %}">
+				<img src="{% static "images/home.png" %} "alt="UofG Crest" height = "70" width = "70" align = "left" />
+			</a>
+			
+			<h1>The Golden Leash</h1>
+			
+		</header>
+		
 		<div>
 			{% block sidebar_block %}
 			{% endblock %}
