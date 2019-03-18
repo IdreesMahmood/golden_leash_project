@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+{% extends 'golden_leash/base.html' %}
 {% load staticfiles %}
 {% load static %}
 
-<html>
-	<head>
-		<title>Golden Leash</title>
-	</head>
+{% block title_block %}
+	<title>Golden Leash</title>
+{% endblock %}
 
-	<body>
+{% block body_block %}
 
 		<h1>About</h1>
 
@@ -22,6 +21,4 @@
 		</div>
 
 		<a href = "/golden_leash/">Home</a>
-
-	</body>
-</html>
+{% endblock %}

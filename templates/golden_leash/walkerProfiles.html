@@ -1,14 +1,10 @@
-<!DOCTYPE html>
+{% extends 'golden_leash/base.html' %}
+{% load staticfiles %}
 
-
-<html>
-	<head>
-		<title>Golden Leash</title>
-	</head>
+{% block title_block %}
+	<title>Golden Leash</title>
+{% endblock %}
 	
-	<body>
-		
-		<p>This is the walker profiles page</p>
-		
-	</body>
-</html>
+{% block body_block %}
+	<p>This is the walker profiles page</p>
+{% endblock %}
