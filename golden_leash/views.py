@@ -11,19 +11,19 @@ from django.contrib.auth import logout
 def index(request):
 
     return render(request, "golden_leash/index.html", {})
-    
+
 def walkerProfiles(request):
 
 	return render(request, "golden_leash/walkerProfiles.html", {})
-	
+
 def viewDogs(request):
 
 	return render(request, "golden_leash/viewDogs.html", {})
-	
+
 def about(request):
 
 	return render(request, "golden_leash/about.html", {})
-	
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -41,6 +41,7 @@ def user_login(request):
             return HttpResponse("Invalid login details supplied.")
     else:
         return render(request, 'golden_leash/login.html', {})
+
 
 def register(request):
     registered = False
