@@ -4,7 +4,8 @@
 
 <html>
 	<head lang="en">
-		<link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+		<!-- <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css"> -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<title>
 			Golden Leash
 			{% block title_block %}
@@ -13,37 +14,70 @@
 		</title>
 	</head>
 	<body>
-		
-		<header>
-			<a href="{% url 'index' %}">
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="{% url 'index' %}">
 				<img src="{% static "images/home.png" %} "alt="UofG Crest" height = "70" width = "70" align = "left" />
 			</a>
-			
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'index' %}">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'walkerProfiles' %}">Walker Profiles</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'viewDogs' %}">View Dogs</a>
+					</li>
+					{% if user.is_authenticated %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'restricted' %}">Restricted Page</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'logout' %}">Logout</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'register' %}">Regsiter</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'login' %}">Login</a>
+						</li>
+					{% endif %}
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'about' %}">About</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<header class="container-fluid">
+
+
 			<h1>The Golden Leash</h1>
-			
+
 		</header>
-		
+
 		<div>
 			{% block sidebar_block %}
 			{% endblock %}
 		</div>
+		<div class="container-fluid">
 			{% block body_block %}
 			{% endblock %}
 		</div>
-		<hr />
-		<div id = "navBar">
-			<ul>
-			{% if user.is_authenticated %}
-				<li><a href="{% url 'restricted' %}">Restricted Page</a></li>
-				<li><a href="{% url 'logout' %}">Logout</a></li>
-			{% else %}
-				<li><a href="{% url 'register' %}">Regsiter here!</a></li>
-				<li><a href="{% url 'login' %}">Login here</a></li>
-			{% endif %}
-				<li><a href="{% url 'walkerProfiles' %}">Walker Profiles</a></li>
-				<li><a href="{% url 'viewDogs' %}">View Dogs</a></li>
-				<li><a href="{% url 'about' %}">About us</a></li>
-			</ul>
-		</div>
+		<hr/>
+
+
+
+
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	</body>
 </html>

@@ -6,12 +6,11 @@
 {% endblock %}
 
 {% block body_block %}
-	<h1>Register for Golden Leash</h1>
+	<h2>Register for Golden Leash</h2>
 	{% if registered %}
 		Rango says: <strong>thank you for registering!</strong>
 		<a href="{% url 'index' %}">Return to the homepage.</a><br />
 	{% else %}
-		Rango says: <strong>register here!</strong><br />
 		<form id="user_form" method="post" action="{% url 'register' %}"
 		enctype="multipart/form-data">
 
