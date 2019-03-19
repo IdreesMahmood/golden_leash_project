@@ -6,11 +6,14 @@
 
 {% block body_block %}
 		<p>This is the view dogs page</p>
-		{% if user.is_authenticated %}
-			{% if request.user.is_owner %}
-				<p>You are an owner</p>
-			{% else %}
-				<p>You are a walker</p>
-			{% endif %}
+		{% if profiles %}
+			{% for profile in profiles %}
+				{% if profile.user.get_username == user.get_username and profile.is_owner%}
+					You are an owner!
+				{% elif profile.user.get_username == user.get_username %}
+					You are a walker!
+				{% endif %}
+			{% endfor %}
 		{% endif %}
+
 {% endblock %}

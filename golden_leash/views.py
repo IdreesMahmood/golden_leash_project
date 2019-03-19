@@ -20,8 +20,9 @@ def walkerProfiles(request):
     return render(request, "golden_leash/walkerProfiles.html", context=context_dict)
 
 def viewDogs(request):
-
-	return render(request, "golden_leash/viewDogs.html", {})
+    profiles = UserProfile.objects.all()
+    context_dict = {'profiles': profiles}
+    return render(request, "golden_leash/viewDogs.html", context=context_dict)
 
 def about(request):
 
