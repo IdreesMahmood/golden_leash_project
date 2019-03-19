@@ -38,9 +38,9 @@ def user_login(request):
                 return HttpResponse("Your Golden Leash account is disabled.")
         else:
             print("Invalid login details: {0}, {1}".format(username, password))
-            return HttpResponse("Invalid login details supplied.")
+            return render(request, "golden_leash/login.html", {"invalid": True})
     else:
-        return render(request, 'golden_leash/login.html', {})
+        return render(request, 'golden_leash/login.html', {"invalid": False})
 
 
 def register(request):
