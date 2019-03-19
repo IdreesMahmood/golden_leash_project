@@ -2,9 +2,17 @@
 {% load staticfiles %}
 
 {% block title_block %}
-	<title>Golden Leash</title>
 {% endblock %}
-	
+
 {% block body_block %}
-	<p>This is the walker profiles page</p>
+	<p>List of walkers: </p>
+	{% if profiles %}
+		{% for profile in profiles %}
+			{% if not profile.is_owner %}
+				<p>{{ profile }}<p>
+			{% endif %}
+		{% endfor %}
+	{% else %}
+		<p>No users</p>
+	{% endif %}
 {% endblock %}

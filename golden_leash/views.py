@@ -6,6 +6,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
+from golden_leash.models import UserProfile
+
 # Create your views here.
 
 def index(request):
@@ -13,8 +15,9 @@ def index(request):
     return render(request, "golden_leash/index.html", {})
 
 def walkerProfiles(request):
-
-	return render(request, "golden_leash/walkerProfiles.html", {})
+    profiles = UserProfile.objects.all()
+    context_dict = {'profiles': profiles}
+    return render(request, "golden_leash/walkerProfiles.html", context=context_dict)
 
 def viewDogs(request):
 
