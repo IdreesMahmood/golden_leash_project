@@ -63,12 +63,14 @@
 
 			<h1>The Golden Leash</h1>
 
+			<h2>
+				{% block header_block %}
+				{% endblock %}
+			</h2>
+
+
 		</header>
 
-		<div>
-			{% block sidebar_block %}
-			{% endblock %}
-		</div>
 		<div class="container-fluid">
 			{% block body_block %}
 			{% endblock %}

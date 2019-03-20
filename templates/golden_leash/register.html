@@ -5,8 +5,12 @@
 	Register
 {% endblock %}
 
+{% block header_block %}
+	Register for Golden Leash
+{% endblock %}
+
 {% block body_block %}
-	<h2>Register for Golden Leash</h2>
+
 	{% if registered %}
 		Rango says: <strong>thank you for registering!</strong>
 		<a href="{% url 'index' %}">Return to the homepage.</a><br />

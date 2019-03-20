@@ -2,10 +2,14 @@
 {% load staticfiles %}
 
 {% block title_block %}
+	View dogs
+{% endblock %}
+
+{% block header_block %}
+	View available dogs
 {% endblock %}
 
 {% block body_block %}
-		<p>This is the view dogs page</p>
 		{% if profiles %}
 			{% for profile in profiles %}
 				{% if profile.user.get_username == user.get_username and profile.is_owner%}
