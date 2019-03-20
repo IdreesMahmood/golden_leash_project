@@ -26,7 +26,9 @@ class Dog(models.Model):
     image = models.ImageField(upload_to="pictures/%Y/%m%d/", max_length=255)
     slug = models.SlugField(unique=True)
     try:
-        owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, default=UserProfile.objects.first())
+        #owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, default=UserProfile.objects.first())
+        #UserProfile.objects.create(user=User.objects.create_user(username='dummy',email='dummy@example.com', password='password'))
+        owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, default=0)
     except OperationalError:
         pass
 
