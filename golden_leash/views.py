@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from golden_leash.forms import UserForm, UserProfileForm, UserEditForm, AddDogForm
+from golden_leash.forms import UserForm, UserProfileForm, UserEditForm, AddDogForm, RemoveDogForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
@@ -9,7 +9,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 
-from golden_leash.models import UserProfile
+from golden_leash.models import UserProfile, Dog
 
 # Create your views here.
 
@@ -133,6 +133,35 @@ def add_dog(request):
 
     return render(request, 'golden_leash/add_dog.html', {'form': form})
 
+@login_required
+def remove_dog(request):
+    form = RemoveDogForm()
+    if request.method == 'POST':
+        form = RemoveDogForm(request.POST)
+        if form.is_valid():
+            dog_to_remove = None
+            dogs = Dog.objects.all()
+            dog_to_remove_name = form.cleaned_data['name']
+            for dog in dogs:
+                if dog.name == dog_to_remove_name:
+                    dog_to_remove = dog
+
+            profiles = UserProfile.objects.all()
+            instanceProfile = None
+            for profile in profiles:
+                if profile.user == request.user:
+                    instanceProfile = profile
+
+            if dog_to_remove.owner == instanceProfile:
+                dog_to_remove.delete()
+
+            return redirect('/golden_leash/my_account/')
+        else:
+
+            print(form.errors)
+
+    return render(request, 'golden_leash/remove_dog.html', {'form': form})
+
 
 @login_required
 def change_password(request):
@@ -156,7 +185,12 @@ def change_password(request):
 @login_required
 def my_account(request):
     profiles = UserProfile.objects.all()
-    context_dict = {'profiles': profiles}
+    instanceProfile = None
+    for profile in profiles:
+        if profile.user == request.user:
+            instanceProfile = profile
+    dogs = Dog.objects.filter(owner=instanceProfile)
+    context_dict = {'profiles': profiles, 'dogs': dogs}
     return render(request, "golden_leash/my_account.html", context_dict)
 
 @login_required

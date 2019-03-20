@@ -31,3 +31,11 @@ class AddDogForm(forms.ModelForm):
         model = Dog
         fields = ('name', 'age', 'breed', 'image')
         exclude = ('owner',)
+
+class RemoveDogForm(forms.ModelForm):
+    #name = forms.CharField(max_length=128, required=False)
+
+    class Meta:
+        model = Dog
+        fields = ('name',)
+        exclude = ('owner', 'age', 'breed', 'image',)

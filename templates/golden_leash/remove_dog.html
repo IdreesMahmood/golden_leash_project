@@ -1,0 +1,27 @@
+{% extends 'golden_leash/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Remove a dog
+{% endblock %}
+
+{% block header_block %}
+  Renove a dog
+{% endblock %}
+
+{% block body_block %}
+
+	<div>
+			<form id="dog_remove_form" method="post" action="{% url 'remove_dog' %}">
+				{% csrf_token %}
+				<div class="form-group">
+					<label for="exampleInputText1">Name:</label>
+					<input type="text" class="form-control" id = "exampleInputText1" name="name" placeholder="Name"/>
+				</div>
+
+				<input type="submit" name="submit" value="Remove Dog" />
+
+			</form>
+	</div>
+
+{% endblock %}

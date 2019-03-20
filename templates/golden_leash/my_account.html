@@ -20,6 +20,13 @@
 				Owner: {{profile.is_owner}}<br>
 				{% if not profile.is_owner %}
 					Rating: {{ profile.rating }}<br>
+				{% else %}
+					Your dogs:<br>
+					{% if dogs %}
+						{% for dog in dogs %}
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ dog.name }}<br>
+						{% endfor %}
+					{% endif %}
 				{% endif %}
 				Picture: {{profile.picture}}<br>
 
@@ -27,6 +34,7 @@
 		{% endfor %}
 	{% endif %}
 
-	<a class="btn-default" href="{% url 'edit_account' %}">Edit Account</a>
+	<a class="btn-default" href="{% url 'edit_account' %}">Edit Account</a><br>
+	<a class="btn-default" href="{% url 'remove_dog' %}">Remove a Dog</a>
 </div>
 {% endblock %}
