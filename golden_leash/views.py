@@ -85,7 +85,11 @@ def edit_account(request):
     profiles = UserProfile.objects.all()
     context_dict = {'profiles': profiles}
     if request.method == 'POST':
-        form = UserEditForm(data=request.POST, instance=request.user)
+        instanceProfile = None
+        for profile in profiles:
+            if profile.user == request.user:
+                instanceProfile = profile
+        form = UserEditForm(data=request.POST, instance=instanceProfile)
 
         if form.is_valid():
             profile = form.save()
