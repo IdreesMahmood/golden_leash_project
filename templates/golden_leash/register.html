@@ -12,11 +12,11 @@
 {% block body_block %}
 
 	{% if registered %}
-		Rango says: <strong>thank you for registering!</strong>
+		<strong>thank you for registering!</strong>
 		<a href="{% url 'index' %}">Return to the homepage.</a><br />
 	{% else %}
 
-	<form  id="user_form" method="post" action="{% url 'register' %}">
+	<form  id="edit_form" method="post" action="{% url 'register' %}">
 		{% csrf_token %}
 		<div class="form-group">
 			<label for="exampleInputText1">Username:</label>
@@ -36,7 +36,7 @@
 	  </div>
 		<div class="checkbox">
 			<label>
-				<input type="checkbox" name="isOwner"> Are you a dog owner? Leave unchecked if you are looking to be a walker.
+				<input type="checkbox" name="is_owner"> Are you a dog owner? Leave unchecked if you are looking to be a walker.
 			</label>
 		</div>
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from golden_leash.forms import UserForm, UserProfileForm
+from golden_leash.forms import UserForm, UserProfileForm, UserEditForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
@@ -14,8 +14,9 @@ from golden_leash.models import UserProfile
 # Create your views here.
 
 def index(request):
-
-    return render(request, "golden_leash/index.html", {})
+    profiles = UserProfile.objects.all()
+    context_dict = {'profiles': profiles}
+    return render(request, "golden_leash/index.html", context=context_dict)
 
 def walkerProfiles(request):
     profiles = UserProfile.objects.all()
@@ -28,8 +29,10 @@ def viewDogs(request):
     return render(request, "golden_leash/viewDogs.html", context=context_dict)
 
 def about(request):
+    profiles = UserProfile.objects.all()
+    context_dict = {'profiles': profiles}
+    return render(request, "golden_leash/about.html", context=context_dict)
 
-	return render(request, "golden_leash/about.html", {})
 
 def user_login(request):
     if request.method == 'POST':
@@ -63,6 +66,7 @@ def register(request):
             user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
+            profile.is_owner = profile_form.cleaned_data['is_owner']
 
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
@@ -76,7 +80,32 @@ def register(request):
         profile_form = UserProfileForm()
     return render(request, 'golden_leash/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
+@login_required
+def edit_account(request):
+    profiles = UserProfile.objects.all()
+    context_dict = {'profiles': profiles}
+    if request.method == 'POST':
+        form = UserEditForm(data=request.POST, instance=request.user)
+
+        if form.is_valid():
+            profile = form.save()
+            profile.fullname = form.cleaned_data['fullname']
+            profile.address = form.cleaned_data['address']
+            profile.picture = form.cleaned_data['picture']
+            profile.is_owner = form.cleaned_data['is_owner']
+            profile.save()
+            return redirect('/golden_leash/my_account/')
+    else:
+        form = UserEditForm(instance=request.user)
+        context_dict['form'] = form
+        return render(request, "golden_leash/edit_account.html", context=context_dict)
+    return render(request, "golden_leash/edit_account.html", context=context_dict)
+
+
+@login_required
 def change_password(request):
+    profiles = UserProfile.objects.all()
+    context_dict = {'profiles': profiles}
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -88,15 +117,23 @@ def change_password(request):
             messages.error(request, 'Please correct the error below.')
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'golden_leash/change_password.html', {
-        'form': form
-    })
+
+    context_dict['form'] = form
+    return render(request, 'golden_leash/change_password.html', context_dict)
 
 @login_required
 def my_account(request):
-    return render(request, "golden_leash/my_account.html", {})
+    profiles = UserProfile.objects.all()
+    context_dict = {'profiles': profiles}
+    return render(request, "golden_leash/my_account.html", context_dict)
 
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+@login_required
+def add_dog(request):
+    profiles = UserProfile.objects.all()
+    context_dict = {'profiles': profiles}
+    return render(request, "golden_leash/add_dog.html", context=context_dict)

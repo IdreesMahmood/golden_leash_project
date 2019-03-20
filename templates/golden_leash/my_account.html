@@ -1,9 +1,8 @@
 {% extends 'golden_leash/base.html' %}
 {% load staticfiles %}
-{% load static %}
 
 {% block title_block %}
-	My account
+	My Account
 {% endblock %}
 
 {% block header_block %}
@@ -11,5 +10,23 @@
 {% endblock %}
 
 {% block body_block %}
+<div class="container-fluid">
+	{% if profiles %}
+		{% for profile in profiles %}
+			{% if profile.user.get_username == user.get_username %}
+				Username: {{profile.user.get_username}}<br>
+				Fullname: {{profile.fullname}}<br>
+				Address: {{profile.address}}<br>
+				Owner: {{profile.is_owner}}<br>
+				{% if not profile.is_owner %}
+					Rating: {{ profile.rating }}<br>
+				{% endif %}
+				Picture: {{profile.picture}}<br>
 
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
+	<a class="btn-default" href="{% url 'edit_account' %}">Edit Account</a>
+</div>
 {% endblock %}

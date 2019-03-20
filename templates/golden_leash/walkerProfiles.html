@@ -9,15 +9,25 @@
 	Dog walker profiles Page
 {% endblock %}
 
+
 {% block body_block %}
-	<p>List of walkers: </p>
+<br>
+<div class="container-fluid">
+	<!-- <h4>List of walkers: </h4> -->
 	{% if profiles %}
 		{% for profile in profiles %}
-			{% if not profile.is_owner %}
-				<p>{{ profile }}<p>
+			{% if not profile.is_owner and not profile.rating == -1 %}
+				<div>
+					<h5>Name: {{ profile.fullname }}</h5>
+					<p>
+					Rating: {{ profile.rating }} <br>
+					Address: {{ profile.address }}
+				</p>
+				</div>
 			{% endif %}
 		{% endfor %}
 	{% else %}
-		<p>No users</p>
+		<strong>No Walkers currently in database.</strong>
 	{% endif %}
+</div>
 {% endblock %}

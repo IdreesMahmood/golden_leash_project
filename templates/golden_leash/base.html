@@ -34,14 +34,24 @@
 						<a class="nav-link" href="{% url 'viewDogs' %}">View Dogs</a>
 					</li>
 					{% if user.is_authenticated %}
-						<li class="nav-item">
-							<a class="nav-link" href="{% url 'my_account' %}">My Account</a>
+						<li class="nav-item dropdown">
+	        		<a class="nav-link dropdown-toggle" href="{% url 'my_account' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								{% if profiles %}
+									{% for profile in profiles %}
+										{% if profile.user.get_username == user.get_username and profile.is_owner%}
+											<a class="dropdown-item" href="{% url 'add_dog' %}">Add a dog</a>
+											<div class="dropdown-divider"></div>
+										{% endif %}
+									{% endfor %}
+								{% endif %}
+							<a class="dropdown-item" href="{% url 'my_account' %}">View Account</a>
+							<a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a>
+							<a class="dropdown-item" href="{% url 'edit_account' %}">Edit Account</a>
+							</div>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{% url 'logout' %}">Logout</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{% url 'change_password' %}">Change Password</a>
 						</li>
 					{% else %}
 						<li class="nav-item">
