@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from golden_leash.forms import UserForm, UserProfileForm, UserEditForm
+from golden_leash.forms import UserForm, UserProfileForm, UserEditForm, AddDogForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
@@ -105,6 +105,34 @@ def edit_account(request):
         return render(request, "golden_leash/edit_account.html", context=context_dict)
     return render(request, "golden_leash/edit_account.html", context=context_dict)
 
+@login_required
+def add_dog(request):
+    form = AddDogForm()
+
+    if request.method == 'POST':
+        form = AddDogForm(request.POST)
+
+        if form.is_valid():
+            dog = form.save()
+            profiles = UserProfile.objects.all()
+            context_dict = {'profiles': profiles}
+            if request.method == 'POST':
+                instanceProfile = None
+                for profile in profiles:
+                    if profile.user == request.user:
+                        instanceProfile = profile
+
+            dog.owner = instanceProfile
+
+            form.save(commit=True)
+
+            return redirect('/golden_leash/my_account/')
+        else:
+
+            print(form.errors)
+
+    return render(request, 'golden_leash/add_dog.html', {'form': form})
+
 
 @login_required
 def change_password(request):
@@ -135,9 +163,3 @@ def my_account(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
-
-@login_required
-def add_dog(request):
-    profiles = UserProfile.objects.all()
-    context_dict = {'profiles': profiles}
-    return render(request, "golden_leash/add_dog.html", context=context_dict)

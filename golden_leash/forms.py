@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from golden_leash.models import UserProfile
+from golden_leash.models import UserProfile, Dog
 
 
 class UserForm(forms.ModelForm):
@@ -19,3 +19,15 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('fullname', 'address', 'picture', 'is_owner')
+
+class AddDogForm(forms.ModelForm):
+    name = forms.CharField(max_length=128, required=False)
+    age = forms.IntegerField(required=False)
+    breed = forms.CharField(max_length=128, required=False)
+    image = forms.ImageField(required=False)
+
+
+    class Meta:
+        model = Dog
+        fields = ('name', 'age', 'breed', 'image')
+        exclude = ('owner',)
