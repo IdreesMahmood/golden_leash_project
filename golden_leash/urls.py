@@ -16,7 +16,7 @@ urlpatterns = [
 	
     url(r'^login/$', views.user_login, name='login'),
 
-    url(r'^restricted/', views.restricted, name='restricted'),
+    url(r'^my_account/', views.my_account, name='my_account'),
     
     url(r'^logout/$', views.user_logout, name='logout'),
     ]

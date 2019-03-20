@@ -74,8 +74,8 @@ def register(request):
     return render(request, 'golden_leash/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 @login_required
-def restricted(request):
-    return HttpResponse("Since you're logged in, you can see this text!")
+def my_account(request):
+    return render(request, "golden_leash/my_account.html", {})
 
 @login_required
 def user_logout(request):
