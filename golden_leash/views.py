@@ -8,28 +8,40 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-
+from django.db.utils import OperationalError
 from golden_leash.models import UserProfile, Dog
 
 # Create your views here.
 
 def index(request):
-    profiles = UserProfile.objects.all()
+    try:
+        profiles = UserProfile.objects.all()
+    except OperationalError:
+        pass
     context_dict = {'profiles': profiles}
     return render(request, "golden_leash/index.html", context=context_dict)
 
 def walkerProfiles(request):
-    profiles = UserProfile.objects.all()
+    try:
+        profiles = UserProfile.objects.all()
+    except OperationalError:
+        pass
     context_dict = {'profiles': profiles}
     return render(request, "golden_leash/walkerProfiles.html", context=context_dict)
 
 def viewDogs(request):
-    profiles = UserProfile.objects.all()
+    try:
+        profiles = UserProfile.objects.all()
+    except OperationalError:
+        pass
     context_dict = {'profiles': profiles}
     return render(request, "golden_leash/viewDogs.html", context=context_dict)
 
 def about(request):
-    profiles = UserProfile.objects.all()
+    try:
+        profiles = UserProfile.objects.all()
+    except OperationalError:
+        pass
     context_dict = {'profiles': profiles}
     return render(request, "golden_leash/about.html", context=context_dict)
 
@@ -82,7 +94,10 @@ def register(request):
 
 @login_required
 def edit_account(request):
-    profiles = UserProfile.objects.all()
+    try:
+        profiles = UserProfile.objects.all()
+    except OperationalError:
+        pass
     context_dict = {'profiles': profiles}
     if request.method == 'POST':
         instanceProfile = None
@@ -114,7 +129,10 @@ def add_dog(request):
 
         if form.is_valid():
             dog = form.save()
-            profiles = UserProfile.objects.all()
+            try:
+                profiles = UserProfile.objects.all()
+            except OperationalError:
+                pass
             context_dict = {'profiles': profiles}
             if request.method == 'POST':
                 instanceProfile = None
@@ -140,13 +158,18 @@ def remove_dog(request):
         form = RemoveDogForm(request.POST)
         if form.is_valid():
             dog_to_remove = None
-            dogs = Dog.objects.all()
+            try:
+                dogs = Dog.objects.all()
+            except OperationalError:
+                pass
             dog_to_remove_name = form.cleaned_data['name']
             for dog in dogs:
                 if dog.name == dog_to_remove_name:
                     dog_to_remove = dog
-
-            profiles = UserProfile.objects.all()
+            try:
+                profiles = UserProfile.objects.all()
+            except OperationalError:
+                pass
             instanceProfile = None
             for profile in profiles:
                 if profile.user == request.user:
@@ -165,7 +188,10 @@ def remove_dog(request):
 
 @login_required
 def change_password(request):
-    profiles = UserProfile.objects.all()
+    try:
+        profiles = UserProfile.objects.all()
+    except OperationalError:
+        pass
     context_dict = {'profiles': profiles}
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -184,7 +210,10 @@ def change_password(request):
 
 @login_required
 def my_account(request):
-    profiles = UserProfile.objects.all()
+    try:
+        profiles = UserProfile.objects.all()
+    except OperationalError:
+        pass
     instanceProfile = None
     for profile in profiles:
         if profile.user == request.user:
