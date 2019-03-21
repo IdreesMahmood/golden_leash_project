@@ -17,17 +17,22 @@
 				Username: {{profile.user.get_username}}<br>
 				Fullname: {{profile.fullname}}<br>
 				Address: {{profile.address}}<br>
-				Owner: {{profile.is_owner}}<br>
-				{% if not profile.is_owner %}
-					Rating: {{ profile.rating }}<br>
-				{% else %}
+				Status: 
+				{% if profile.is_owner %}
+					Owner<br>
 					Your dogs:<br>
 					{% if dogs %}
 						{% for dog in dogs %}
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ dog.name }}<br>
 						{% endfor %}
 					{% endif %}
+					
+				{% else %}
+					Walker<br>
+					Rating: {{ profile.rating }}<br>
 				{% endif %}
+				<br>
+			
 				Picture: {{profile.picture}}<br>
 
 			{% endif %}
