@@ -82,7 +82,7 @@ def register(request):
 
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
-
+            
             profile.save()
             registered = True
         else:
