@@ -12,7 +12,8 @@ class UserProfile(models.Model):
 
     fullname = models.CharField(max_length=128, default="")
     address = models.CharField(max_length=256, default="")
-    rating = models.IntegerField(default=3)
+    rating = models.IntegerField(default=0)
+
 
     slug = models.SlugField(unique=True)
 

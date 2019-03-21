@@ -27,20 +27,20 @@
 				<li>Jamie Sinclair - 2325933s@student.gla.ac.uk</li>
 			</ul>
 		</div>
-		
-		
+
+
 		<h1>Location</h1>
 		<div id = "map"></div>
 		<script>
-	
+
 		function initMap(){
-			
+
 			//map options
 			var options = {
 				zoom:16,
 				center:{lat:55.8723, lng:-4.2892}
 			}
-			
+
 			// new map
 			var map = new google.maps.Map(document.getElementById('map'), options);
 			// new marker
@@ -50,7 +50,7 @@
 			})
 		}
 		</script>
-		
+
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0KszIoduPJvL9K3mQAUN_UdueaOr0UKo&callback=initMap"
         async defer>
         </script>

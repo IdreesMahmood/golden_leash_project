@@ -5,6 +5,14 @@
     {{ profile.name }}
 {% endblock %}
 
+{% block head_block %}
+<!-- https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static 'js/vote.js' %}"></script>
+
+{% endblock %}
+
 {% block body_block %}
     {% if walker %}
         <h2>{{ walker.fullname }}</h2>
@@ -12,20 +20,15 @@
         {% if user.is_authenticated %}
           {% for profile in profiles %}
             {% if profile.user.get_username == user.get_username and profile.is_owner %}
-              HERE YOU CAN UP/DOWNVOTE {{walker.fullname}}
-              <form id="rating_form" method = "post" action = "{% url "rating">
-                {% csrf_token %}
-                <div class = "dropdown">
-                  <select name="rating">
-                      <option value=1>1</option>
-                      <option value=2>2</option>
-                      <option value=3>3</option>
-                      <option value=4>4</option>
-                      <option value=5>5</option>
-                   </select>
-                </div>
-                <input type="submit" name="submit" value="Add rating" />
-              </form>
+              <div>
+              <b>{{walker.fullname}} has a rating of:</b>
+              <h5><strong id="like_count"> {{ walker.rating }} </strong></h5>
+              {% if user.is_authenticated %}
+                <button id ="likes" data-walkerid="{{walker.id}}" class="btn btn-mini btn-primary" type="button">Upvote</button>
+                <!-- unused dislike button -->
+                <!-- <button id ="dislikes" data-walkerid="{{walker.id}}" class="btn btn-mini btn-primary" type="button">Downvote</button> -->
+              {% endif %}
+              </div>
             {% elif profile.user.get_username == user.get_username and not profile.is_owner %}
               Only dog owners can leave a rating/review!
             {% endif %}

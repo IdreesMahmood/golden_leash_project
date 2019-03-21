@@ -28,5 +28,12 @@ urlpatterns = [
 
     url(r'^edit_account/$', views.edit_account, name='edit_account'),
 
+    url(r'^like_walker/$', views.like_walker, name='like_walker'),
+
+    # unused dislike button
+    # url(r'^dislike_walker/$', views.dislike_walker, name='dislike_walker'),
+
     url(r'^walker/(?P<walker_name_slug>[\w\-]+)/$', views.show_walker, name='show_walker'),
+
+
     ]

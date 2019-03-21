@@ -49,6 +49,37 @@ def show_walker(request, walker_name_slug):
 
     return render(request, 'golden_leash/walker.html', context_dict)
 
+
+@login_required
+def like_walker(request):
+    walker_id = None
+    if request.method == 'GET':
+        walker_id = request.GET['walker_id']
+    likes = 0
+    if walker_id:
+        walker = UserProfile.objects.get(id=int(walker_id))
+        if walker:
+            likes = walker.rating + 1
+            walker.rating = likes
+            walker.save()
+    return HttpResponse(likes)
+
+# unused dislike button
+# @login_required
+# def dislike_walker(request):
+#     walker_id = None
+#     if request.method == 'GET':
+#         walker_id = request.GET['walker_id']
+#     likes = 0
+#     print("hi")
+#     if walker_id:
+#         walker = UserProfile.objects.get(id=int(walker_id))
+#         if walker:
+#             likes = walker.rating - 1
+#             walker.rating = likes
+#             walker.save()
+#     return HttpResponse(likes)
+
 def viewDogs(request):
     try:
         profiles = UserProfile.objects.all()
