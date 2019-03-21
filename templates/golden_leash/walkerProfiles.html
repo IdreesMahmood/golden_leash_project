@@ -25,7 +25,20 @@
         Picture: {{profile.picture}}<br>
         {% for profile1 in profiles %}
           {% if profile1.user.get_username == user.get_username and profile1.is_owner %}
-            <a href="#" >Leave a review for {{profile.fullname}}</a>
+            <Review walker?<br>
+            <form id="rating_form" method = "post" action = "{% url "rating">
+              {% csrf_token %}
+              <div class = "dropdown">
+                <select name="rating">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                 </select>  
+              </div>  
+              <input type="submit" name="submit" value="Add rating" />
+            </form> 
           {% endif %}
         {% endfor %}
         <br><br>
