@@ -44,7 +44,6 @@ def populate():
 		
 def add_dog(name,age,breed,owner):
 	o, bool = UserProfile.objects.get_or_create(address = owner)
-	print(o)
 	d = Dog.objects.get_or_create(name = name, age = age, breed = breed,  owner = o)[0]
 	name = d.name
 	age = d.age
