@@ -31,17 +31,23 @@
 					Walker<br>
 					Rating: {{ profile.rating }}<br>
 				{% endif %}
+				Picture: {{profile.picture}}<br>
+
+				<a class="btn-default" href="{% url 'edit_account' %}">Edit Account</a><br>
+				{% if profile.is_owner %}
+					<a class="btn-default" href="{% url 'add_dog' %}">Add a dog</a><br>
+				{% endif %}
+				{% if dogs %}
+					<a class="btn-default" href="{% url 'remove_dog' %}">Remove a Dog</a>
+				{% endif %}
 				<br>
 
-				Picture: {{profile.picture}}<br>
+
 
 			{% endif %}
 		{% endfor %}
 	{% endif %}
 
-	<a class="btn-default" href="{% url 'edit_account' %}">Edit Account</a><br>
-	{% if dogs %}
-		<a class="btn-default" href="{% url 'remove_dog' %}">Remove a Dog</a>
-	{% endif %}
+
 </div>
 {% endblock %}

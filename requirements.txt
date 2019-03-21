@@ -4,6 +4,7 @@ cffi==1.11.5
 Django==1.11.17
 django-bootstrap-toolkit==2.15.0
 django-cors-headers==2.4.0
+django-jquery==3.1.0
 olefile==0.46
 Pillow==5.3.0
 pycparser==2.19
