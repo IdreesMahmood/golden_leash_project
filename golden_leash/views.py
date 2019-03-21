@@ -246,18 +246,19 @@ def remove_dog(request):
                 profiles = UserProfile.objects.all()
             except OperationalError:
                 pass
+
             instanceProfile = None
             for profile in profiles:
                 if profile.user == request.user:
                     instanceProfile = profile
-
-            if dog_to_remove.owner == instanceProfile:
-                dog_to_remove.delete()
+            if dog_to_remove:
+                if dog_to_remove.owner == instanceProfile:
+                    dog_to_remove.delete()
 
             return redirect('/golden_leash/my_account/')
         else:
 
-            print(form.errors)
+            return redirect('/golden_leash/my_account/')
 
     return render(request, 'golden_leash/remove_dog.html', {'form': form})
 
