@@ -23,6 +23,7 @@ class Dog(models.Model):
     name = models.CharField(max_length=128)
     age = models.IntegerField(default=0)
     breed = models.CharField(max_length=128)
+    available = models.BooleanField(default=True)
     image = models.ImageField(upload_to="pictures/%Y/%m%d/", max_length=255)
     slug = models.SlugField(unique=True)
     try:

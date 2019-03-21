@@ -17,22 +17,22 @@
 				Username: {{profile.user.get_username}}<br>
 				Fullname: {{profile.fullname}}<br>
 				Address: {{profile.address}}<br>
-				Status: 
+				Status:
 				{% if profile.is_owner %}
 					Owner<br>
-					Your dogs:<br>
 					{% if dogs %}
+					Your dogs:<br>
 						{% for dog in dogs %}
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ dog.name }}<br>
 						{% endfor %}
 					{% endif %}
-					
+
 				{% else %}
 					Walker<br>
 					Rating: {{ profile.rating }}<br>
 				{% endif %}
 				<br>
-			
+
 				Picture: {{profile.picture}}<br>
 
 			{% endif %}
@@ -40,6 +40,8 @@
 	{% endif %}
 
 	<a class="btn-default" href="{% url 'edit_account' %}">Edit Account</a><br>
-	<a class="btn-default" href="{% url 'remove_dog' %}">Remove a Dog</a>
+	{% if dogs %}
+		<a class="btn-default" href="{% url 'remove_dog' %}">Remove a Dog</a>
+	{% endif %}
 </div>
 {% endblock %}

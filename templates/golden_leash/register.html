@@ -12,7 +12,8 @@
 {% block body_block %}
 
 	{% if registered %}
-		<strong>thank you for registering!</strong>
+		Thank you for registering!
+		<strong>Please finish <a class="btn-default" href="{% url 'edit_account' %}">setting up your profile</a></strong><br>
 		<a href="{% url 'index' %}">Return to the homepage.</a><br />
 	{% else %}
 

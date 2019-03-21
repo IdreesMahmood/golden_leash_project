@@ -16,7 +16,7 @@
 	<!-- <h4>List of walkers: </h4> -->
 	{% if profiles %}
 		{% for profile in profiles %}
-			{% if not profile.is_owner and not profile.rating == -1 %}
+			{% if not profile.is_owner and not profile.fullname == '' %}
 				<div>
 					<h5>Name: {{ profile.fullname }}</h5>
 					<p>

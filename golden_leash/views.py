@@ -32,9 +32,10 @@ def walkerProfiles(request):
 def viewDogs(request):
     try:
         profiles = UserProfile.objects.all()
+        dogs = Dog.objects.all()
     except OperationalError:
         pass
-    context_dict = {'profiles': profiles}
+    context_dict = {'profiles': profiles, 'dogs': dogs}
     return render(request, "golden_leash/viewDogs.html", context=context_dict)
 
 def about(request):
@@ -82,9 +83,12 @@ def register(request):
 
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
-            
+
             profile.save()
             registered = True
+            new_user = authenticate(username=user_form.cleaned_data['username'],
+                                    password=user_form.cleaned_data['password'],)
+            login(request, new_user)
         else:
             print(user_form.errors, profile_form.errors)
     else:

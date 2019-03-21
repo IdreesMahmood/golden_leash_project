@@ -10,14 +10,32 @@
 {% endblock %}
 
 {% block body_block %}
-		{% if profiles %}
-			{% for profile in profiles %}
-				{% if profile.user.get_username == user.get_username and profile.is_owner%}
-					You are an owner!
-				{% elif profile.user.get_username == user.get_username %}
-					You are a walker!
+	<div class="container-fluid">
+		<div class="row">
+		{% if dogs %}
+			{% for dog in dogs %}
+				{% if dog.available %}
+					<div class="col-md-2">
+					Name: {{dog.name}}<br>
+					Age: {{dog.age}}<br>
+					Breed: {{dog.breed}}<br>
+					Owner: {{dog.owner.fullname}}<br>
+					Picture: {{dog.image}}<br>
+					{% for profile in profiles %}
+						{% if profile.user.get_username == user.get_username and not profile.is_owner %}
+							<a href="#" >Book to walk {{dog.name}}</a>
+						{% endif %}
+					{% endfor %}
+					<br><br>
+					</div>
 				{% endif %}
 			{% endfor %}
-		{% endif %}
 
+		{% else %}
+
+			Currently no dogs are available
+
+		{% endif %}
+		</div>
+	</div>
 {% endblock %}
