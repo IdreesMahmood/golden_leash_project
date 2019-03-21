@@ -2,13 +2,29 @@
 {% load staticfiles %}
 
 {% block header_block %}
-		<h1 id="heading">Homepage</h1>	
+		<h1 id="heading">Homepage</h1>		
 {% endblock %}
 
 {% block body_block %}
+
 		<div>
 			Here at Golden Leash, we offer a service that enables dog
 			owners to connect with dog walkers so that they can request for them to
 			walk their dogs for them.
 		</div><br>
+		
+		<div class="gallery">
+  			<a target="_blank" href="{% static "images/home.png" %}">
+    		<img src="{% static "images/home.png" %}" alt="Dog" width="600" height="400">
+  			</a>
+  			<div class="desc">Add a description of the image here</div>
+		</div>
+
+		<div class="gallery">
+  			<a target="_blank" href="{% static "images/home.png" %}">
+    		<img src="{% static "images/home.png" %}" alt="Dog" width="600" height="400">
+  			</a>
+  			<div class="desc">Add a description of the image here</div>
+		</div>
+		
 {% endblock %}
