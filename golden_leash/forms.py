@@ -21,7 +21,7 @@ class UserEditForm(forms.ModelForm):
         fields = ('fullname', 'address', 'picture', 'is_owner')
 
 class AddDogForm(forms.ModelForm):
-    nalme = forms.CharField(max_length=128, required=False)
+    name = forms.CharField(max_length=128, required=False)
     age = forms.IntegerField(required=False)
     breed = forms.CharField(max_length=128, required=False)
     image = forms.ImageField(required=False)
@@ -39,6 +39,7 @@ class RemoveDogForm(forms.ModelForm):
         model = Dog
         fields = ('name',)
         exclude = ('owner', 'age', 'breed', 'image',)
+
 class RatingForm(forms.ModelForm):
 
     class Meta:
