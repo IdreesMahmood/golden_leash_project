@@ -14,6 +14,12 @@ class UserProfile(models.Model):
     address = models.CharField(max_length=256, default="")
     rating = models.IntegerField(default=3)
 
+    slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.fullname)
+        super(UserProfile, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.user.username
 

@@ -19,28 +19,10 @@
     {% for profile in profiles %}
       {% if not profile.is_owner and not profile.fullname == '' %}
         <div class="col-md-2">
-        <h5>Name: {{profile.fullname}}</h5>
+        <h5>Name: <a href="{% url 'show_walker' profile.slug %}">{{profile.fullname}}</a></h5>
         Rating: {{profile.rating}}<br>
         Address: {{profile.address}}<br>
         Picture: {{profile.picture}}<br>
-        {% for profile1 in profiles %}
-          {% if profile1.user.get_username == user.get_username and profile1.is_owner %}
-            <Review walker?<br>
-            <form id="rating_form" method = "post" action = "{% url "rating">
-              {% csrf_token %}
-              <div class = "dropdown">
-                <select name="rating">
-                    <option value=1>1</option>
-                    <option value=2>2</option>
-                    <option value=3>3</option>
-                    <option value=4>4</option>
-                    <option value=5>5</option>
-                 </select>  
-              </div>  
-              <input type="submit" name="submit" value="Add rating" />
-            </form> 
-          {% endif %}
-        {% endfor %}
         <br><br>
         </div>
       {% endif %}

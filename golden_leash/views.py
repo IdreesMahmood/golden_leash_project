@@ -29,6 +29,26 @@ def walkerProfiles(request):
     context_dict = {'profiles': profiles}
     return render(request, "golden_leash/walkerProfiles.html", context=context_dict)
 
+def show_walker(request, walker_name_slug):
+    context_dict={}
+    try:
+        profiles = UserProfile.objects.all()
+        context_dict = {'profiles': profiles}
+    except OperationalError:
+        pass
+
+
+    try:
+
+        walker = UserProfile.objects.get(slug=walker_name_slug)
+        if not (walker.is_owner):
+            context_dict['walker'] = walker
+
+    except walker.DoesNotExist:
+        pass
+
+    return render(request, 'golden_leash/walker.html', context_dict)
+
 def viewDogs(request):
     try:
         profiles = UserProfile.objects.all()

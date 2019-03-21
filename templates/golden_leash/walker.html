@@ -1,0 +1,38 @@
+{% extends 'golden_leash/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {{ profile.name }}
+{% endblock %}
+
+{% block body_block %}
+    {% if walker %}
+        <h2>{{ walker.fullname }}</h2>
+
+        {% if user.is_authenticated %}
+          {% for profile in profiles %}
+            {% if profile.user.get_username == user.get_username and profile.is_owner %}
+              HERE YOU CAN UP/DOWNVOTE {{walker.fullname}}
+              <form id="rating_form" method = "post" action = "{% url "rating">
+                {% csrf_token %}
+                <div class = "dropdown">
+                  <select name="rating">
+                      <option value=1>1</option>
+                      <option value=2>2</option>
+                      <option value=3>3</option>
+                      <option value=4>4</option>
+                      <option value=5>5</option>
+                   </select>
+                </div>
+                <input type="submit" name="submit" value="Add rating" />
+              </form>
+            {% elif profile.user.get_username == user.get_username and not profile.is_owner %}
+              Only dog owners can leave a rating/review!
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+    {% else %}
+        The specified walker does not exist!
+    {% endif %}
+{% endblock %}

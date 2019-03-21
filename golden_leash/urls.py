@@ -27,4 +27,6 @@ urlpatterns = [
     url(r'^add_dog/$', views.add_dog, name='add_dog'),
 
     url(r'^edit_account/$', views.edit_account, name='edit_account'),
+
+    url(r'^walker/(?P<walker_name_slug>[\w\-]+)/$', views.show_walker, name='show_walker'),
     ]
