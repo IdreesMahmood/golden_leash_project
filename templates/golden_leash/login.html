@@ -2,15 +2,15 @@
 {% load staticfiles %}
 
 {% block body_block %}
-
-{%if invalid %}
-	<strong>Invalid login details supplied. Please try again.</strong>
-{% endif %}
 <link href="http://v4-alpha.getbootstrap.com/examples/signin/signin.css"
 	rel="stylesheet">
 <div class="jumbotron">
 	<h1 class="display-3">Login</h1>
 </div>
+{%if invalid %}
+	<strong>Invalid login details supplied. Please try again.</strong>
+{% endif %}
+
 <form class="form-signin" role="form" method="post" action=".">
 	{% csrf_token %}
 	<h2 class="form-signin-heading">Please sign in</h2>
