@@ -49,6 +49,27 @@ def show_walker(request, walker_name_slug):
 
     return render(request, 'golden_leash/walker.html', context_dict)
 
+def book_dog(request, dog_name_slug):
+    context_dict={}
+    try:
+        profiles = UserProfile.objects.all()
+        dogs = Dog.objects.all()
+        context_dict = {'profiles': profiles}
+    except OperationalError:
+        pass
+
+    try:
+        dog = Dog.objects.get(slug=dog_name_slug)
+        context_dict['dog'] = dog
+    except dog.DoesNotExist:
+        pass
+
+    if dog:
+        dog.available = False
+        dog.save()
+
+    return render(request, 'golden_leash/book_dog.html', context_dict)
+
 
 @login_required
 def like_walker(request):

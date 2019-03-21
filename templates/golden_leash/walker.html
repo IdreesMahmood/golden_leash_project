@@ -2,14 +2,13 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    {{ profile.name }}
+    {{ walker.name }}
 {% endblock %}
 
 {% block head_block %}
-<!-- https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="{% static 'js/vote.js' %}"></script>
+  <script src="{% static 'js/like.js' %}"></script>
 
 {% endblock %}
 

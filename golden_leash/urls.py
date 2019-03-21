@@ -35,5 +35,6 @@ urlpatterns = [
 
     url(r'^walker/(?P<walker_name_slug>[\w\-]+)/$', views.show_walker, name='show_walker'),
 
+    url(r'^dog/(?P<dog_name_slug>[\w\-]+)/$', views.book_dog, name='book_dog'),
 
     ]

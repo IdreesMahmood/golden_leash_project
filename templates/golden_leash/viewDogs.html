@@ -21,10 +21,11 @@
 					Age: {{dog.age}}<br>
 					Breed: {{dog.breed}}<br>
 					Owner: {{dog.owner.fullname}}<br>
+					Address: {{dog.owner.address}}<br>
 					Picture: {{dog.image}}<br>
 					{% for profile in profiles %}
 						{% if profile.user.get_username == user.get_username and not profile.is_owner %}
-							<a href="#" >Book to walk {{dog.name}}</a>
+							<a href="{% url 'book_dog' dog.slug %}" >Book to walk {{dog.name}}</a>
 						{% endif %}
 					{% endfor %}
 					<br><br>
