@@ -11,12 +11,13 @@
 
 {% block body_block %}
 	<div class="container-fluid">
+		<br>
 		<div class="row">
 		{% if dogs %}
 			{% for dog in dogs %}
 				{% if dog.available %}
 					<div class="col-md-2">
-					Name: {{dog.name}}<br>
+					<h5>Name: {{dog.name}}</h5>
 					Age: {{dog.age}}<br>
 					Breed: {{dog.breed}}<br>
 					Owner: {{dog.owner.fullname}}<br>

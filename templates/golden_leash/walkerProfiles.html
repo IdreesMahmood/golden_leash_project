@@ -13,21 +13,31 @@
 {% block body_block %}
 <br>
 <div class="container-fluid">
-	<!-- <h4>List of walkers: </h4> -->
-	{% if profiles %}
-		{% for profile in profiles %}
-			{% if not profile.is_owner and not profile.fullname == '' %}
-				<div>
-					<h5>Name: {{ profile.fullname }}</h5>
-					<p>
-					Rating: {{ profile.rating }} <br>
-					Address: {{ profile.address }}
-				</p>
-				</div>
-			{% endif %}
-		{% endfor %}
-	{% else %}
-		<strong>No Walkers currently in database.</strong>
-	{% endif %}
+  <br>
+  <div class="row">
+  {% if profiles %}
+    {% for profile in profiles %}
+      {% if not profile.is_owner and not profile.fullname == '' %}
+        <div class="col-md-2">
+        <h5>Name: {{profile.fullname}}</h5>
+        Rating: {{profile.rating}}<br>
+        Address: {{profile.address}}<br>
+        Picture: {{profile.picture}}<br>
+        {% for profile1 in profiles %}
+          {% if profile1.user.get_username == user.get_username and profile1.is_owner %}
+            <a href="#" >Leave a review for {{profile.fullname}}</a>
+          {% endif %}
+        {% endfor %}
+        <br><br>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+  {% else %}
+
+    Currently no walkers are available
+
+  {% endif %}
+  </div>
 </div>
 {% endblock %}
