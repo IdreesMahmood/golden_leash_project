@@ -10,7 +10,8 @@
 {% endblock %}
 
 {% block body_block %}
-
+	
+	<!-- basic input form used to add a dog to the current users list of dogs -->
 	<div>
 			<form id="dog_form" method="post" action="{% url 'add_dog' %}">
 				{% csrf_token %}
