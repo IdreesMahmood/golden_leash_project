@@ -31,8 +31,9 @@
 					Walker<br>
 					Rating: {{ profile.rating }}<br>
 				{% endif %}
-				Picture: {{profile.picture}}<br>
-
+				{% if profile.picture %}
+				Picture: <img src="{{profile.picture.url}}" width="120"><br>
+				{% endif %}
 				<a class="btn-default" href="{% url 'edit_account' %}">Edit Account</a><br>
 				{% if profile.is_owner %}
 					<a class="btn-default" href="{% url 'add_dog' %}">Add a dog</a><br>

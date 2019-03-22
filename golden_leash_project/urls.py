@@ -26,3 +26,5 @@ urlpatterns = [
     url(r'^golden_leash/', include('golden_leash.urls')),
     url(r'^admin/', admin.site.urls),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

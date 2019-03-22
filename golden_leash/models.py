@@ -34,7 +34,7 @@ class Dog(models.Model):
     age = models.IntegerField(default=0)
     breed = models.CharField(max_length=128)
     available = models.BooleanField(default=True)
-    image = models.ImageField(upload_to="pictures/%Y/%m%d/", max_length=255)
+    image = models.ImageField(upload_to="dog_images", blank=True)
     slug = models.SlugField(unique=True)
     try:
         #owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, default=UserProfile.objects.first())

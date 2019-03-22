@@ -22,7 +22,9 @@
         <h5>Name: <a href="{% url 'show_walker' profile.slug %}">{{profile.fullname}}</a></h5>
         Rating: {{profile.rating}}<br>
         Address: {{profile.address}}<br>
-        Picture: {{profile.picture}}<br>
+    	{% if profile.picture %}
+	Picture: <img src="{{profile.picture.url}}" width="120"><br>
+	{% endif %}
         <br><br>
         </div>
       {% endif %}
