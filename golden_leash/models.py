@@ -15,10 +15,13 @@ class UserProfile(models.Model):
     rating = models.IntegerField(default=0)
 
 
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=False)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.fullname)
+        try:
+            self.slug = slugify(self.fullname)
+        except:
+            pass
         super(UserProfile, self).save(*args, **kwargs)
 
     def __str__(self):
