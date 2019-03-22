@@ -5,8 +5,7 @@ walker if they are satisfied with their service. Walkers are able to view each d
 
 To run on your own machine, you must have a Python 3.7 virtual enviornment with Django 1.11.17 and Pillow installed.
 Before running the server, you must write "pip install -r requirements.txt" into the command line, then 
-"python manage.py makemigrations golden_leash" and "python manage.py migrate". To run the server, use
-"python manage.py runserver" and put the URL displayed in the command prompt into a web browser.
+"python manage.py makemigrations golden_leash" and "python manage.py migrate". to populte the database, enter "python populate_golden_leash.py" into the command prompt To run the server, use "python manage.py runserver" and put the URL displayed in the command prompt into a web browser.
 
 To run the tests, type "python golden_leash/tests.py" into the command prompt. This will perform the unit testing
 of the project.
