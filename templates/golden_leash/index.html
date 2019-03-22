@@ -9,10 +9,9 @@
 
 		<div>
 			Here at Golden Leash, we offer a service that enables dog
-			owners to connect with dog walkers so that they can request for them to
-			walk their dogs for them.
-		</div><br>
-		
+			owners to connect with dog walkers in order to arrange days
+			that their dogs need walked.
+			<br>
 		<div class="gallery">
   			<a target="_blank" href="{% static "images/home.png" %}">
     		<img src="{% static "images/home.png" %}" alt="Dog" width="60" height="40">
@@ -26,5 +25,23 @@
   			</a>
   			<div class="desc">Add a description of the image here</div>
 		</div>
+		
+		<div class = "ratingsList">
+		
+			<h3> Highest Rated Walkers </h3>
+			{% if ratings %}
+			<ul>
+				{% for rating in ratings %} 
+					<li>
+						<p> {{ rating }} </p>
+					</li>
+				{% endfor %}
+			</ul>
+			{% else %}
+				<strong>There are no walkers present.</strong>
+			{% endif %} 
+		</div>
+		
+		
 		
 {% endblock %}

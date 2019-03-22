@@ -14,20 +14,21 @@ from golden_leash.models import UserProfile, Dog
 # Create your views here.
 
 def index(request):
-    try:
-        profiles = UserProfile.objects.all()
-    except OperationalError:
-        pass
-    context_dict = {'profiles': profiles}
-    return render(request, "golden_leash/index.html", context=context_dict)
+	walker_list = UserProfile.objects.order_by('-rating')[:5]
+	try:
+		profiles = UserProfile.objects.all()
+	except OperationalError:
+		pass
+	context_dict = {'profiles': profiles, 'ratings': walker_list}
+	return render(request, "golden_leash/index.html", context=context_dict)
 
 def walkerProfiles(request):
-    try:
-        profiles = UserProfile.objects.all()
-    except OperationalError:
-        pass
-    context_dict = {'profiles': profiles}
-    return render(request, "golden_leash/walkerProfiles.html", context=context_dict)
+	try:
+		profiles = UserProfile.objects.all()
+	except OperationalError:
+		pass
+	context_dict = {'profiles': profiles}
+	return render(request, "golden_leash/walkerProfiles.html", context=context_dict)
 
 def show_walker(request, walker_name_slug):
     context_dict={}

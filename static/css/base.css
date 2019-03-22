@@ -28,3 +28,11 @@ input:focus {
 	outline: 0 none;
 }
 
+div.ratingsList {
+	border: 3px solid #777;
+	margin: 40px;
+	float: right;
+}
+
+
+
